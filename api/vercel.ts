@@ -6,8 +6,6 @@ import { appRouter } from "./router";
 import { createContext } from "./context";
 
 export const config = {
-  runtime: "nodejs20.x",
-  // Increase max duration for AI calls (60s for Hobby, up to 800 for Pro)
   maxDuration: 60,
 };
 
