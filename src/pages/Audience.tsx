@@ -98,10 +98,12 @@ export default function Audience() {
   };
 
   const nlExamples = [
-    "Customers who spent over 2000 but haven't returned in 60 days",
-    "Win back our lapsed subscription customers",
-    "Target high-value weekend enthusiasts",
+    "Customers who spent over 3000 but haven't returned in 60 days",
+    "Win back lapsed subscription loyalists",
+    "High-value VIP customers above ₹5000",
     "New customers who joined in the last 14 days",
+    "Active weekend enthusiasts with 3+ orders",
+    "Lapsed office regulars inactive for 90 days",
   ];
 
   return (

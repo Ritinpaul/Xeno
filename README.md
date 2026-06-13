@@ -3,6 +3,23 @@
 > Built for the **Xeno Engineering Take-Home Assignment 2026**
 > A production-grade Mini CRM that helps a D2C brand intelligently reach its shoppers.
 
+**🚀 Live Demo**: [https://xeno-blush.vercel.app](https://xeno-blush.vercel.app)
+
+---
+
+## What to Try (5-Minute Evaluator Walkthrough)
+
+| Step | Where | What to do |
+|------|--------|-----------|
+| 1 | **Dashboard** | View live KPIs — 500 customers, 2000+ orders, ₹65L+ revenue |
+| 2 | **Audience → Natural Language** | Type "customers who spent over ₹3000 but haven't returned in 60 days" |
+| 3 | **Audience → Save** | Save the discovered segment |
+| 4 | **Campaigns → New Campaign** | Select the segment, pick WhatsApp, set goal "re-engage lapsed customers" |
+| 5 | **Campaigns → Launch** | Watch AI generate 3 personalised message variants, then launch |
+| 6 | **Performance** | Watch the live delivery funnel: queued → sent → delivered → opened → clicked → converted |
+| 7 | **Campaigns → AI Insight** | See post-campaign analysis with actual vs predicted metrics |
+| 8 | **Customers** | Click any customer for Customer 360 view |
+
 ---
 
 ## What This Is
@@ -166,31 +183,37 @@ App runs at `http://localhost:3000`
 
 ---
 
-## Deployment (Railway / Render)
+## Deployment (Vercel)
 
-### Railway
-1. Connect your GitHub repo
-2. Set environment variables (DATABASE_URL, APP_SECRET, NODE_ENV=production)
-3. Set build command: `npm install && npm run build`
-4. Set start command: `npm run start`
-5. Connect to your Supabase PostgreSQL instance
+This project is deployed on Vercel with a single serverless function entry point.
 
-### Environment Variables for Production
-```
-NODE_ENV=production
-PORT=3000
-DATABASE_URL=postgresql://postgres:password@db.supabase.co:5432/postgres
-APP_ID=your-app-id
-APP_SECRET=your-strong-secret-here
-```
+### Live URL
+**https://xeno-blush.vercel.app**
+
+### Deploy Your Own
+1. Fork the repo and connect to Vercel
+2. Set environment variables in Vercel dashboard:
+   ```
+   NODE_ENV=production
+   DATABASE_URL=postgresql://postgres:password@db.supabase.co:5432/postgres
+   ```
+3. Vercel auto-detects the `vercel.json` config and deploys
+
+### How it works
+- `api/index.ts` is the single serverless function entry point
+- All tRPC routes are mounted under `/api/trpc/*`
+- Frontend is served as a static SPA from `dist/`
+- Rewrites route `/api/*` to the serverless function, everything else to `index.html`
 
 ---
 
 ## Project Structure
 
 ```
-app/
-├── api/                    # Backend (tRPC + Hono)
+Xeno/
+├── api/
+│   └── index.ts           # Vercel serverless entry point (Hono)
+├── server/                 # Backend (tRPC + Hono)
 │   ├── boot.ts            # Server entry point
 │   ├── router.ts          # Root tRPC router
 │   ├── middleware.ts       # tRPC middleware, context
@@ -212,14 +235,12 @@ app/
 │   │   ├── Home.tsx       # Intelligence Hub dashboard
 │   │   ├── Customers.tsx  # Customer browser
 │   │   ├── Audience.tsx   # Segment builder (manual + NL)
-│   │   ├── Campaigns.tsx  # Campaign wizard
+│   │   ├── Campaigns.tsx  # Campaign wizard with channel-styled preview
 │   │   ├── Performance.tsx # Live campaign tracking
 │   │   └── Customer.tsx   # Customer 360 view
 │   └── providers/
-│       └── trpc.ts        # tRPC + React Query setup
-├── contracts/
-│   ├── types.ts           # Shared types
-│   └── errors.ts          # Error definitions
+│       └── trpc.tsx       # tRPC + React Query setup
+├── vercel.json             # Vercel deployment config
 └── .env.example           # Environment variables reference
 ```
 

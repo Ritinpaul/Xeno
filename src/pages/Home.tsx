@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { trpc } from "@/providers/trpc";
 import {
@@ -11,6 +12,8 @@ import {
   Zap,
   Mail,
   CheckCircle,
+  X,
+  BookOpen,
 } from "lucide-react";
 
 function StatCard({
@@ -108,15 +111,42 @@ function AISegmentCard({
 export default function Home() {
   const navigate = useNavigate();
   const { data: stats, isLoading } = trpc.analytics.dashboard.useQuery();
+  const [showBanner, setShowBanner] = useState(true);
 
   if (isLoading || !stats) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="flex items-center gap-3">
-          <Zap className="w-5 h-5 text-bloom-terracotta animate-pulse" />
-          <span className="text-sm text-bloom-warm-gray">
-            Loading your intelligence hub...
-          </span>
+      <div className="space-y-6">
+        {/* Skeleton loading state */}
+        <div className="grid grid-cols-4 gap-4">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="bloom-card p-5">
+              <div className="skeleton h-3 w-20 mb-3" />
+              <div className="skeleton h-8 w-28 mb-2" />
+              <div className="skeleton h-3 w-16" />
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-3 gap-6">
+          <div className="col-span-2 bloom-card p-5">
+            <div className="skeleton h-4 w-32 mb-4" />
+            <div className="grid grid-cols-2 gap-3">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="skeleton h-24 rounded-xl" />
+              ))}
+            </div>
+          </div>
+          <div className="bloom-card p-5">
+            <div className="skeleton h-4 w-24 mb-4" />
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="flex items-center gap-3 mb-3">
+                <div className="skeleton w-8 h-8 rounded-full" />
+                <div className="flex-1">
+                  <div className="skeleton h-3 w-full mb-1.5" />
+                  <div className="skeleton h-2 w-2/3" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -128,6 +158,47 @@ export default function Home() {
 
   return (
     <div className="space-y-6">
+      {/* Evaluator Guide Banner */}
+      {showBanner && (
+        <div className="guide-banner animate-slide-up">
+          <button
+            onClick={() => setShowBanner(false)}
+            className="absolute top-3 right-3 p-1 rounded-full hover:bg-white/10 transition-colors"
+          >
+            <X className="w-4 h-4 text-white/70" />
+          </button>
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 mt-0.5">
+              <BookOpen className="w-5 h-5 text-white" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-display font-semibold text-white text-base mb-1">
+                👋 Welcome to Bloom Coffee Co. CRM
+              </h3>
+              <p className="text-white/70 text-xs mb-3">
+                AI-native Mini CRM built for the Xeno Engineering Assignment · Live at{" "}
+                <a href="https://xeno-blush.vercel.app" target="_blank" className="underline text-white/90 hover:text-white">xeno-blush.vercel.app</a>
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: "1. Build a segment", path: "/audience" },
+                  { label: "2. Launch a campaign", path: "/campaigns" },
+                  { label: "3. Watch live delivery", path: "/performance" },
+                  { label: "4. View Customer 360", path: "/customers" },
+                ].map((step) => (
+                  <button
+                    key={step.path}
+                    onClick={() => navigate(step.path)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-white text-xs font-medium transition-colors"
+                  >
+                    {step.label} <ArrowRight className="w-3 h-3" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Welcome */}
       <div className="animate-fade-in">
         <h2 className="font-display text-2xl font-bold text-bloom-charcoal">
