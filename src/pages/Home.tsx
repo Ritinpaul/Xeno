@@ -199,7 +199,7 @@ export default function Home() {
             </button>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {stats.aiSegments.map((segment, i) => (
+            {stats.aiSegments.map((segment: any, i: number) => (
               <AISegmentCard key={segment.id} segment={segment} index={i} />
             ))}
           </div>
@@ -255,7 +255,7 @@ export default function Home() {
                   No activity yet. Launch a campaign to see updates.
                 </p>
               ) : (
-                stats.recentActivity.map((activity) => (
+                stats.recentActivity.map((activity: any) => (
                   <div
                     key={activity.id}
                     className="flex items-start gap-3 pb-3 border-b border-bloom-light-warm/50 last:border-0"

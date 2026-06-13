@@ -262,7 +262,7 @@ export default function Performance() {
         </div>
       ) : (
         <div className="space-y-3">
-          {campaigns?.map((campaign) => (
+          {campaigns?.map((campaign: any) => (
             <div
               key={campaign.id}
               className="bloom-card p-5 flex items-center gap-5 hover:shadow-md transition-all cursor-pointer"
