@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { trpc } from "@/providers/trpc";
+import { toast } from "sonner";
 import {
   Search,
   Users,
@@ -12,6 +13,8 @@ import {
   TrendingUp,
   ShoppingBag,
   Filter,
+  Plus,
+  X,
 } from "lucide-react";
 
 const PERSONAS = [
@@ -45,10 +48,14 @@ function HealthBar({ score }: { score: number | null }) {
 
 export default function Customers() {
   const navigate = useNavigate();
+  const utils = trpc.useUtils();
   const [search, setSearch] = useState("");
   const [persona, setPersona] = useState("");
   const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [newCustomerName, setNewCustomerName] = useState("");
+  const [newCustomerEmail, setNewCustomerEmail] = useState("");
 
   const { data, isLoading } = trpc.customer.list.useQuery({
     search: search || undefined,
@@ -58,6 +65,20 @@ export default function Customers() {
   });
 
   const { data: stats } = trpc.customer.getStats.useQuery();
+
+  const createCustomerMutation = trpc.customer.create.useMutation({
+    onSuccess: () => {
+      toast.success("Customer added successfully!");
+      setIsAddModalOpen(false);
+      setNewCustomerName("");
+      setNewCustomerEmail("");
+      utils.customer.list.invalidate();
+      utils.customer.getStats.invalidate();
+    },
+    onError: () => {
+      toast.error("Failed to add customer. Please try again.");
+    },
+  });
 
   const handleSearch = () => {
     setSearch(searchInput);
@@ -69,16 +90,33 @@ export default function Customers() {
     setPage(1);
   };
 
+  const handleAddCustomer = (e: React.FormEvent) => {
+    e.preventDefault();
+    createCustomerMutation.mutate({
+      name: newCustomerName,
+      email: newCustomerEmail,
+    });
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="animate-fade-in">
-        <h2 className="font-display text-2xl font-bold text-bloom-charcoal">
-          Customer Intelligence
-        </h2>
-        <p className="text-sm text-bloom-warm-gray mt-1">
-          Browse and explore your shoppers, their purchase history, and health scores.
-        </p>
+      <div className="animate-fade-in flex items-start justify-between">
+        <div>
+          <h2 className="font-display text-2xl font-bold text-bloom-charcoal">
+            Customer Intelligence
+          </h2>
+          <p className="text-sm text-bloom-warm-gray mt-1">
+            Browse and explore your shoppers, their purchase history, and health scores.
+          </p>
+        </div>
+        <button
+          onClick={() => setIsAddModalOpen(true)}
+          className="bloom-btn-primary flex items-center gap-2"
+        >
+          <Plus className="w-4 h-4" />
+          Add Customer
+        </button>
       </div>
 
       {/* Stats Row */}
@@ -142,7 +180,7 @@ export default function Customers() {
             ))}
           </select>
         </div>
-        <button onClick={handleSearch} className="bloom-btn-primary flex items-center gap-2">
+        <button onClick={handleSearch} className="bloom-btn-secondary flex items-center gap-2 px-6 py-2.5">
           <Search className="w-4 h-4" />
           Search
         </button>
@@ -262,6 +300,73 @@ export default function Customers() {
             >
               Next <ChevronRight className="w-4 h-4" />
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Add Customer Modal */}
+      {isAddModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bloom-charcoal/20 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden relative">
+            <button
+              onClick={() => setIsAddModalOpen(false)}
+              className="absolute top-4 right-4 text-bloom-warm-gray hover:text-bloom-charcoal transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="p-6">
+              <h3 className="font-display text-xl font-bold text-bloom-charcoal mb-1">
+                Add New Customer
+              </h3>
+              <p className="text-sm text-bloom-warm-gray mb-6">
+                Enter the customer's details to manually add them to your intelligence hub.
+              </p>
+              <form onSubmit={handleAddCustomer} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-medium text-bloom-charcoal mb-1.5 uppercase tracking-wider">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    value={newCustomerName}
+                    onChange={(e) => setNewCustomerName(e.target.value)}
+                    className="bloom-input w-full"
+                    placeholder="e.g. Jane Doe"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-bloom-charcoal mb-1.5 uppercase tracking-wider">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    value={newCustomerEmail}
+                    onChange={(e) => setNewCustomerEmail(e.target.value)}
+                    className="bloom-input w-full"
+                    placeholder="e.g. jane@example.com"
+                    required
+                  />
+                </div>
+                <div className="pt-4 flex justify-end gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsAddModalOpen(false)}
+                    className="bloom-btn-secondary px-4 py-2"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={createCustomerMutation.isPending}
+                    className="bloom-btn-primary px-6 py-2 flex items-center gap-2"
+                  >
+                    {createCustomerMutation.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+                    Add Customer
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}

@@ -1,18 +1,17 @@
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import { env } from "../lib/env";
 import * as schema from "@db/schema";
 import * as relations from "@db/relations";
 
 const fullSchema = { ...schema, ...relations };
 
-import { NeonHttpDatabase } from "drizzle-orm/neon-http";
-
-let instance: NeonHttpDatabase<typeof fullSchema> | undefined;
+let instance: ReturnType<typeof drizzle<typeof fullSchema>>;
+let queryClient: ReturnType<typeof postgres>;
 
 export function getDb() {
   if (!instance) {
-    const queryClient = neon(env.databaseUrl);
+    queryClient = postgres(env.databaseUrl);
     instance = drizzle(queryClient, {
       schema: fullSchema,
     });

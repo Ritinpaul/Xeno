@@ -117,4 +117,27 @@ export const customerRouter = createRouter({
 
       return segmentCustomersList;
     }),
+
+  create: publicQuery
+    .input(
+      z.object({
+        name: z.string().min(1, "Name is required"),
+        email: z.string().email("Invalid email"),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const db = getDb();
+      const newCustomer = await db
+        .insert(customers)
+        .values({
+          name: input.name,
+          email: input.email,
+          persona: "new",
+          healthScore: 100,
+          totalSpent: "0",
+          totalOrders: 0,
+        })
+        .returning();
+      return newCustomer[0];
+    }),
 });
