@@ -18,9 +18,9 @@ await build({
     "@": resolve(__dirname, "src"),
   },
   external: [
-    "postgres",
+    "@neondatabase/serverless",
     "drizzle-orm",
-    "drizzle-orm/postgres-js",
+    "drizzle-orm/neon-http",
     "dotenv",
     "dotenv/config",
     "zod",

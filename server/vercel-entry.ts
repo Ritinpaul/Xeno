@@ -13,6 +13,8 @@ const app = new Hono().basePath("/api");
 
 app.use(bodyLimit({ maxSize: 50 * 1024 * 1024 }));
 
+app.get("/ping", (c) => c.json({ message: "pong" }));
+
 app.use("/trpc/*", async (c) => {
   return fetchRequestHandler({
     endpoint: "/api/trpc",

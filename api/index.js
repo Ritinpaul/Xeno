@@ -2184,18 +2184,18 @@ var init_relations = __esm({
 });
 
 // server/queries/connection.ts
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 function getDb() {
   if (!instance) {
-    queryClient = postgres(env.databaseUrl);
+    const queryClient = neon(env.databaseUrl);
     instance = drizzle(queryClient, {
       schema: fullSchema
     });
   }
   return instance;
 }
-var fullSchema, instance, queryClient;
+var fullSchema, instance;
 var init_connection = __esm({
   "server/queries/connection.ts"() {
     init_env();
@@ -7055,6 +7055,7 @@ var config = {
 };
 var app = new Hono2().basePath("/api");
 app.use(bodyLimit({ maxSize: 50 * 1024 * 1024 }));
+app.get("/ping", (c) => c.json({ message: "pong" }));
 app.use("/trpc/*", async (c) => {
   return fetchRequestHandler({
     endpoint: "/api/trpc",
