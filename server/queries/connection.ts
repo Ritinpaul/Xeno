@@ -11,7 +11,7 @@ let queryClient: ReturnType<typeof postgres>;
 
 export function getDb() {
   if (!instance) {
-    queryClient = postgres(env.databaseUrl);
+    queryClient = postgres(env.databaseUrl, { prepare: false });
     instance = drizzle(queryClient, {
       schema: fullSchema,
     });
