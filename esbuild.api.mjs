@@ -11,7 +11,7 @@ await build({
   platform: "node",
   target: "node20",
   format: "cjs",
-  outfile: "api/index.cjs",
+  outfile: "api/index.js",
   alias: {
     "@db": resolve(__dirname, "db"),
     "@contracts": resolve(__dirname, "contracts"),
@@ -31,4 +31,4 @@ await build({
   treeShaking: true,
 });
 
-console.log("✅ api/index.cjs bundled successfully");
+console.log("✅ api/index.js bundled successfully");

@@ -4,14 +4,14 @@
   "outputDirectory": "dist/public",
   "installCommand": "npm install",
   "functions": {
-    "api/index.cjs": {
+    "api/index.js": {
       "maxDuration": 60
     }
   },
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/api/index.cjs"
+      "destination": "/api/index"
     },
     {
       "source": "/:path*",
