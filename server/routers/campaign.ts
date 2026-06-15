@@ -2,7 +2,7 @@ import { z } from "zod";
 import { createRouter, publicQuery } from "../middleware";
 import { getDb } from "../queries/connection";
 import { campaigns, messages, segments, customers } from "@db/schema";
-import { eq, desc, sql } from "drizzle-orm";
+import { eq, desc, sql, inArray } from "drizzle-orm";
 
 // Channel simulation models
 const CHANNEL_MODELS = {
@@ -54,9 +54,20 @@ function generatePersonalizedMessage(
   const tone = BRAND_TONE;
 
   // Template-based personalization with AI-like quality
+  const getFavProduct = (metadata: any) => {
+    if (!metadata) return "our Monsoon Malabar";
+    try {
+      const parsed = typeof metadata === "string" ? JSON.parse(metadata) : metadata;
+      return parsed.favoriteProduct || "our Monsoon Malabar";
+    } catch {
+      return "our Monsoon Malabar";
+    }
+  };
+  const favProduct = getFavProduct(customer.metadata);
+
   const templates: Record<string, string[]> = {
     reengagement: [
-      `${tone.greeting[variant % tone.greeting.length]} ${name}, we miss you at Bloom. Your last cup of ${customer.metadata ? JSON.parse(customer.metadata as string).favoriteProduct || "our Monsoon Malabar" : "our Monsoon Malabar"} was a while ago. Come back and get 15% off your next order. We've been roasting something special. Use code COMEBACK15. ${tone.closing[variant % tone.closing.length]}`,
+      `${tone.greeting[variant % tone.greeting.length]} ${name}, we miss you at Bloom. Your last cup of ${favProduct} was a while ago. Come back and get 15% off your next order. We've been roasting something special. Use code COMEBACK15. ${tone.closing[variant % tone.closing.length]}`,
       `${name}, your coffee ritual is calling. We noticed you haven't stopped by in a while — your usual ${customer.persona === "subscription_loyalist" ? "subscription" : "order"} is waiting. Here's 15% off to welcome you back: COMEBACK15. ${tone.closing[variant % tone.closing.length]}`,
       `We saved your spot, ${name}. The Monsoon Malabar is tasting better than ever, and we thought of you. 15% off with COMEBACK15 — because some cups are worth coming back for. ${tone.closing[variant % tone.closing.length]}`,
     ],
@@ -170,11 +181,15 @@ export const campaignRouter = createRouter({
 
       const customerIds = segCustomers.map((sc) => sc.customerId);
 
+      if (customerIds.length === 0) {
+        throw new Error("Cannot create a campaign for a segment with no customers.");
+      }
+
       // Get customer details
       const customerDetails = await db
         .select()
         .from(customers)
-        .where(sql`${customers.id} IN (${sql.join(customerIds)})`);
+        .where(inArray(customers.id, customerIds));
 
       // Predict metrics
       const channelModel = CHANNEL_MODELS[input.channel];

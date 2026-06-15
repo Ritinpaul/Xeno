@@ -60,7 +60,12 @@ export default function Campaigns() {
     onSuccess: (data) => {
       setCampaignResult(data);
       setStep("confirm");
+      toast.success("Campaign generated successfully!");
     },
+    onError: (error) => {
+      console.error("Campaign creation failed:", error);
+      toast.error(error.message || "Failed to generate campaign messages");
+    }
   });
   const launchCampaign = trpc.campaign.launch.useMutation({
     onSuccess: (data) => {
@@ -233,35 +238,44 @@ export default function Campaigns() {
                 Select Your Audience
               </h3>
               <div className="grid grid-cols-2 gap-3">
-                {segments?.map((seg) => (
-                  <button
-                    key={seg.id}
-                    onClick={() => setSelectedSegment(seg.id)}
-                    className={`p-4 rounded-lg border-2 text-left transition-all ${
-                      selectedSegment === seg.id
-                        ? "border-bloom-brown bg-bloom-cream/30"
-                        : "border-bloom-light-warm hover:border-bloom-warm-gray/30"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-semibold text-bloom-brown">
-                        {seg.name}
-                      </h4>
-                      {seg.isAiSuggested && (
-                        <Sparkles className="w-3.5 h-3.5 text-bloom-terracotta" />
-                      )}
-                    </div>
-                    <p className="text-xs text-bloom-warm-gray mt-1 line-clamp-1">
-                      {seg.description}
-                    </p>
-                    <div className="flex items-center gap-1 mt-2">
-                      <Users className="w-3 h-3 text-bloom-warm-gray" />
-                      <span className="text-xs text-bloom-warm-gray">
-                        {seg.customerCount} customers
-                      </span>
-                    </div>
-                  </button>
-                ))}
+                {(!segments || segments.length === 0) ? (
+                  <div className="col-span-2 p-8 text-center border-2 border-dashed border-bloom-light-warm rounded-lg bg-bloom-cream/20">
+                    <Users className="w-8 h-8 text-bloom-warm-gray mx-auto mb-3" />
+                    <h4 className="font-display font-semibold text-bloom-charcoal">No segments found</h4>
+                    <p className="text-sm text-bloom-warm-gray mt-1">Create an audience segment in the Audience Builder first.</p>
+                    <button onClick={() => navigate("/audience")} className="mt-4 bloom-btn-accent text-sm">Go to Audience Builder</button>
+                  </div>
+                ) : (
+                  segments?.map((seg) => (
+                    <button
+                      key={seg.id}
+                      onClick={() => setSelectedSegment(seg.id)}
+                      className={`p-4 rounded-lg border-2 text-left transition-all ${
+                        selectedSegment === seg.id
+                          ? "border-bloom-brown bg-bloom-cream/30"
+                          : "border-bloom-light-warm hover:border-bloom-warm-gray/30"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-sm font-semibold text-bloom-brown">
+                          {seg.name}
+                        </h4>
+                        {seg.isAiSuggested === 1 && (
+                          <Sparkles className="w-3.5 h-3.5 text-bloom-terracotta" />
+                        )}
+                      </div>
+                      <p className="text-xs text-bloom-warm-gray mt-1 line-clamp-1">
+                        {seg.description}
+                      </p>
+                      <div className="flex items-center gap-1 mt-2">
+                        <Users className="w-3 h-3 text-bloom-warm-gray" />
+                        <span className="text-xs text-bloom-warm-gray">
+                          {seg.customerCount} customers
+                        </span>
+                      </div>
+                    </button>
+                  ))
+                )}
               </div>
               <div className="flex justify-end pt-4">
                 <button
