@@ -2184,18 +2184,18 @@ var init_relations = __esm({
 });
 
 // server/queries/connection.ts
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 function getDb() {
   if (!instance) {
-    const queryClient = neon(env.databaseUrl);
+    queryClient = postgres(env.databaseUrl, { prepare: false });
     instance = drizzle(queryClient, {
       schema: fullSchema
     });
   }
   return instance;
 }
-var fullSchema, instance;
+var fullSchema, instance, queryClient;
 var init_connection = __esm({
   "server/queries/connection.ts"() {
     init_env();
@@ -6403,6 +6403,23 @@ var customerRouter = createRouter({
     if (ids.length === 0) return [];
     const segmentCustomersList = await db.select().from(customers).where(sql`${customers.id} IN (${sql.join(ids)})`);
     return segmentCustomersList;
+  }),
+  create: publicQuery.input(
+    z.object({
+      name: z.string().min(1, "Name is required"),
+      email: z.string().email("Invalid email")
+    })
+  ).mutation(async ({ input }) => {
+    const db = getDb();
+    const newCustomer = await db.insert(customers).values({
+      name: input.name,
+      email: input.email,
+      persona: "new",
+      healthScore: 100,
+      totalSpent: "0",
+      totalOrders: 0
+    }).returning();
+    return newCustomer[0];
   })
 });
 
@@ -6652,7 +6669,7 @@ init_middleware();
 init_connection();
 init_schema();
 import { z as z4 } from "zod";
-import { eq as eq4, desc as desc3, sql as sql4 } from "drizzle-orm";
+import { eq as eq4, desc as desc3, sql as sql4, inArray } from "drizzle-orm";
 var CHANNEL_MODELS2 = {
   whatsapp: {
     deliveryRate: 0.95,
@@ -6693,9 +6710,19 @@ var BRAND_TONE = {
 function generatePersonalizedMessage(customer, channel, campaignGoal, variant) {
   const name = customer.name.split(" ")[0];
   const tone = BRAND_TONE;
+  const getFavProduct = (metadata) => {
+    if (!metadata) return "our Monsoon Malabar";
+    try {
+      const parsed = typeof metadata === "string" ? JSON.parse(metadata) : metadata;
+      return parsed.favoriteProduct || "our Monsoon Malabar";
+    } catch {
+      return "our Monsoon Malabar";
+    }
+  };
+  const favProduct = getFavProduct(customer.metadata);
   const templates = {
     reengagement: [
-      `${tone.greeting[variant % tone.greeting.length]} ${name}, we miss you at Bloom. Your last cup of ${customer.metadata ? JSON.parse(customer.metadata).favoriteProduct || "our Monsoon Malabar" : "our Monsoon Malabar"} was a while ago. Come back and get 15% off your next order. We've been roasting something special. Use code COMEBACK15. ${tone.closing[variant % tone.closing.length]}`,
+      `${tone.greeting[variant % tone.greeting.length]} ${name}, we miss you at Bloom. Your last cup of ${favProduct} was a while ago. Come back and get 15% off your next order. We've been roasting something special. Use code COMEBACK15. ${tone.closing[variant % tone.closing.length]}`,
       `${name}, your coffee ritual is calling. We noticed you haven't stopped by in a while \u2014 your usual ${customer.persona === "subscription_loyalist" ? "subscription" : "order"} is waiting. Here's 15% off to welcome you back: COMEBACK15. ${tone.closing[variant % tone.closing.length]}`,
       `We saved your spot, ${name}. The Monsoon Malabar is tasting better than ever, and we thought of you. 15% off with COMEBACK15 \u2014 because some cups are worth coming back for. ${tone.closing[variant % tone.closing.length]}`
     ],
@@ -6770,7 +6797,10 @@ var campaignRouter = createRouter({
     const { segmentCustomers: segCustTable } = await Promise.resolve().then(() => (init_schema(), schema_exports));
     const segCustomers = await db.select({ customerId: segCustTable.customerId }).from(segCustTable).where(eq4(segCustTable.segmentId, input.segmentId));
     const customerIds = segCustomers.map((sc) => sc.customerId);
-    const customerDetails = await db.select().from(customers).where(sql4`${customers.id} IN (${sql4.join(customerIds)})`);
+    if (customerIds.length === 0) {
+      throw new Error("Cannot create a campaign for a segment with no customers.");
+    }
+    const customerDetails = await db.select().from(customers).where(inArray(customers.id, customerIds));
     const channelModel = CHANNEL_MODELS2[input.channel];
     const count = customerIds.length;
     const predictedSent = count;
