@@ -1,36 +1,27 @@
-var __create = Object.create;
+import { createRequire } from 'module';
+import { fileURLToPath as _fileURLToPath } from 'url';
+import { dirname as _dirname } from 'path';
+const require = createRequire(import.meta.url);
+const __filename = _fileURLToPath(import.meta.url);
+const __dirname = _dirname(__filename);
 var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b2) => (typeof require !== "undefined" ? require : a)[b2]
+}) : x)(function(x) {
+  if (typeof require !== "undefined") return require.apply(this, arguments);
+  throw Error('Dynamic require of "' + x + '" is not supported');
+});
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
-var __commonJS = (cb, mod) => function __require() {
+var __commonJS = (cb, mod) => function __require2() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __copyProps = (to, from, except2, desc2) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except2)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc2 = __getOwnPropDesc(from, key)) || desc2.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // node_modules/@trpc/server/dist/codes-DagpWZLc.mjs
 function mergeWithoutOverrides(obj1, ...objs) {
@@ -199,30 +190,30 @@ function getErrorShape(opts) {
   if (typeof path === "string") shape.data.path = path;
   return config3.errorFormatter((0, import_objectSpread2.default)((0, import_objectSpread2.default)({}, opts), {}, { shape }));
 }
-var __create2, __defProp2, __getOwnPropDesc2, __getOwnPropNames2, __getProtoOf2, __hasOwnProp2, __commonJS2, __copyProps2, __toESM2, noop, freezeIfAvailable, createRecursiveProxy, JSONRPC2_TO_HTTP_CODE, require_typeof, require_toPrimitive, require_toPropertyKey, require_defineProperty, require_objectSpread2, import_objectSpread2;
+var __create, __defProp2, __getOwnPropDesc, __getOwnPropNames2, __getProtoOf, __hasOwnProp, __commonJS2, __copyProps, __toESM, noop, freezeIfAvailable, createRecursiveProxy, JSONRPC2_TO_HTTP_CODE, require_typeof, require_toPrimitive, require_toPropertyKey, require_defineProperty, require_objectSpread2, import_objectSpread2;
 var init_getErrorShape_BPSzUA7W = __esm({
   "node_modules/@trpc/server/dist/getErrorShape-BPSzUA7W.mjs"() {
     init_codes_DagpWZLc();
-    __create2 = Object.create;
+    __create = Object.create;
     __defProp2 = Object.defineProperty;
-    __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+    __getOwnPropDesc = Object.getOwnPropertyDescriptor;
     __getOwnPropNames2 = Object.getOwnPropertyNames;
-    __getProtoOf2 = Object.getPrototypeOf;
-    __hasOwnProp2 = Object.prototype.hasOwnProperty;
+    __getProtoOf = Object.getPrototypeOf;
+    __hasOwnProp = Object.prototype.hasOwnProperty;
     __commonJS2 = (cb, mod) => function() {
       return mod || (0, cb[__getOwnPropNames2(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
     };
-    __copyProps2 = (to, from, except2, desc2) => {
+    __copyProps = (to, from, except2, desc2) => {
       if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames2(from), i = 0, n = keys.length, key; i < n; i++) {
         key = keys[i];
-        if (!__hasOwnProp2.call(to, key) && key !== except2) __defProp2(to, key, {
+        if (!__hasOwnProp.call(to, key) && key !== except2) __defProp2(to, key, {
           get: ((k) => from[k]).bind(null, key),
-          enumerable: !(desc2 = __getOwnPropDesc2(from, key)) || desc2.enumerable
+          enumerable: !(desc2 = __getOwnPropDesc(from, key)) || desc2.enumerable
         });
       }
       return to;
     };
-    __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", {
+    __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp2(target, "default", {
       value: mod,
       enumerable: true
     }) : target, mod));
@@ -255,18 +246,18 @@ var init_getErrorShape_BPSzUA7W = __esm({
       SERVICE_UNAVAILABLE: 503,
       GATEWAY_TIMEOUT: 504
     };
-    require_typeof = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/typeof.js"(exports2, module2) {
+    require_typeof = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/typeof.js"(exports, module) {
       function _typeof$2(o) {
         "@babel/helpers - typeof";
-        return module2.exports = _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
+        return module.exports = _typeof$2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
           return typeof o$1;
         } : function(o$1) {
           return o$1 && "function" == typeof Symbol && o$1.constructor === Symbol && o$1 !== Symbol.prototype ? "symbol" : typeof o$1;
-        }, module2.exports.__esModule = true, module2.exports["default"] = module2.exports, _typeof$2(o);
+        }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof$2(o);
       }
-      module2.exports = _typeof$2, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+      module.exports = _typeof$2, module.exports.__esModule = true, module.exports["default"] = module.exports;
     } });
-    require_toPrimitive = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/toPrimitive.js"(exports2, module2) {
+    require_toPrimitive = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/toPrimitive.js"(exports, module) {
       var _typeof$1 = require_typeof()["default"];
       function toPrimitive$1(t2, r) {
         if ("object" != _typeof$1(t2) || !t2) return t2;
@@ -278,18 +269,18 @@ var init_getErrorShape_BPSzUA7W = __esm({
         }
         return ("string" === r ? String : Number)(t2);
       }
-      module2.exports = toPrimitive$1, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+      module.exports = toPrimitive$1, module.exports.__esModule = true, module.exports["default"] = module.exports;
     } });
-    require_toPropertyKey = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/toPropertyKey.js"(exports2, module2) {
+    require_toPropertyKey = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/toPropertyKey.js"(exports, module) {
       var _typeof = require_typeof()["default"];
       var toPrimitive = require_toPrimitive();
       function toPropertyKey$1(t2) {
         var i = toPrimitive(t2, "string");
         return "symbol" == _typeof(i) ? i : i + "";
       }
-      module2.exports = toPropertyKey$1, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+      module.exports = toPropertyKey$1, module.exports.__esModule = true, module.exports["default"] = module.exports;
     } });
-    require_defineProperty = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/defineProperty.js"(exports2, module2) {
+    require_defineProperty = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/defineProperty.js"(exports, module) {
       var toPropertyKey = require_toPropertyKey();
       function _defineProperty(e, r, t2) {
         return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
@@ -299,9 +290,9 @@ var init_getErrorShape_BPSzUA7W = __esm({
           writable: true
         }) : e[r] = t2, e;
       }
-      module2.exports = _defineProperty, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+      module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
     } });
-    require_objectSpread2 = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/objectSpread2.js"(exports2, module2) {
+    require_objectSpread2 = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/objectSpread2.js"(exports, module) {
       var defineProperty = require_defineProperty();
       function ownKeys(e, r) {
         var t2 = Object.keys(e);
@@ -324,9 +315,9 @@ var init_getErrorShape_BPSzUA7W = __esm({
         }
         return e;
       }
-      module2.exports = _objectSpread2, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+      module.exports = _objectSpread2, module.exports.__esModule = true, module.exports["default"] = module.exports;
     } });
-    import_objectSpread2 = __toESM2(require_objectSpread2(), 1);
+    import_objectSpread2 = __toESM(require_objectSpread2(), 1);
   }
 });
 
@@ -544,7 +535,7 @@ var init_tracked_DWInO6EQ = __esm({
     defaultFormatter = ({ shape }) => {
       return shape;
     };
-    import_defineProperty = __toESM2(require_defineProperty(), 1);
+    import_defineProperty = __toESM(require_defineProperty(), 1);
     UnknownCauseError = class extends Error {
       constructor(cause) {
         super(getMessage(cause));
@@ -564,7 +555,7 @@ var init_tracked_DWInO6EQ = __esm({
         (_this$cause = this.cause) !== null && _this$cause !== void 0 || (this.cause = cause);
       }
     };
-    import_objectSpread2$1 = __toESM2(require_objectSpread2(), 1);
+    import_objectSpread2$1 = __toESM(require_objectSpread2(), 1);
     defaultTransformer = {
       input: {
         serialize: (obj) => obj,
@@ -575,7 +566,7 @@ var init_tracked_DWInO6EQ = __esm({
         deserialize: (obj) => obj
       }
     };
-    import_objectSpread22 = __toESM2(require_objectSpread2(), 1);
+    import_objectSpread22 = __toESM(require_objectSpread2(), 1);
     lazyMarker = "lazyMarker";
     emptyRouter = {
       _ctx: null,
@@ -805,9 +796,9 @@ var init_initTRPC_BRf4imah = __esm({
     init_getErrorShape_BPSzUA7W();
     init_codes_DagpWZLc();
     init_tracked_DWInO6EQ();
-    import_objectSpread2$2 = __toESM2(require_objectSpread2(), 1);
+    import_objectSpread2$2 = __toESM(require_objectSpread2(), 1);
     middlewareMarker = "middlewareMarker";
-    import_defineProperty3 = __toESM2(require_defineProperty(), 1);
+    import_defineProperty3 = __toESM(require_defineProperty(), 1);
     StandardSchemaV1Error = class extends Error {
       /**
       * Creates a schema error with useful information.
@@ -822,7 +813,7 @@ var init_initTRPC_BRf4imah = __esm({
         this.issues = issues;
       }
     };
-    require_objectWithoutPropertiesLoose = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/objectWithoutPropertiesLoose.js"(exports2, module2) {
+    require_objectWithoutPropertiesLoose = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/objectWithoutPropertiesLoose.js"(exports, module) {
       function _objectWithoutPropertiesLoose(r, e) {
         if (null == r) return {};
         var t2 = {};
@@ -832,9 +823,9 @@ var init_initTRPC_BRf4imah = __esm({
         }
         return t2;
       }
-      module2.exports = _objectWithoutPropertiesLoose, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+      module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
     } });
-    require_objectWithoutProperties = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/objectWithoutProperties.js"(exports2, module2) {
+    require_objectWithoutProperties = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/objectWithoutProperties.js"(exports, module) {
       var objectWithoutPropertiesLoose = require_objectWithoutPropertiesLoose();
       function _objectWithoutProperties$1(e, t2) {
         if (null == e) return {};
@@ -845,10 +836,10 @@ var init_initTRPC_BRf4imah = __esm({
         }
         return i;
       }
-      module2.exports = _objectWithoutProperties$1, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+      module.exports = _objectWithoutProperties$1, module.exports.__esModule = true, module.exports["default"] = module.exports;
     } });
-    import_objectWithoutProperties = __toESM2(require_objectWithoutProperties(), 1);
-    import_objectSpread2$13 = __toESM2(require_objectSpread2(), 1);
+    import_objectWithoutProperties = __toESM(require_objectWithoutProperties(), 1);
+    import_objectSpread2$13 = __toESM(require_objectSpread2(), 1);
     _excluded = [
       "middlewares",
       "inputs",
@@ -859,7 +850,7 @@ This is a client-only function.
 If you want to call this function on the server, see https://trpc.io/docs/v11/server/server-side-calls
 `.trim();
     isServerDefault = typeof window === "undefined" || "Deno" in window || ((_globalThis$process = globalThis.process) === null || _globalThis$process === void 0 || (_globalThis$process = _globalThis$process.env) === null || _globalThis$process === void 0 ? void 0 : _globalThis$process["NODE_ENV"]) === "test" || !!((_globalThis$process2 = globalThis.process) === null || _globalThis$process2 === void 0 || (_globalThis$process2 = _globalThis$process2.env) === null || _globalThis$process2 === void 0 ? void 0 : _globalThis$process2["JEST_WORKER_ID"]) || !!((_globalThis$process3 = globalThis.process) === null || _globalThis$process3 === void 0 || (_globalThis$process3 = _globalThis$process3.env) === null || _globalThis$process3 === void 0 ? void 0 : _globalThis$process3["VITEST_WORKER_ID"]);
-    import_objectSpread25 = __toESM2(require_objectSpread2(), 1);
+    import_objectSpread25 = __toESM(require_objectSpread2(), 1);
     TRPCBuilder = class TRPCBuilder2 {
       /**
       * Add a context shape as a generic to the root object
@@ -16768,6 +16759,11 @@ var init_bytes = __esm({
 });
 
 // node_modules/postgres/src/connection.js
+import net from "net";
+import tls from "tls";
+import crypto2 from "crypto";
+import Stream from "stream";
+import { performance } from "perf_hooks";
 function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclose = noop2 } = {}) {
   const {
     sslnegotiation,
@@ -16808,7 +16804,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
   async function createSocket() {
     let x;
     try {
-      x = options.socket ? await Promise.resolve(options.socket(options)) : new import_net.default.Socket();
+      x = options.socket ? await Promise.resolve(options.socket(options)) : new net.Socket();
     } catch (e) {
       error48(e);
       return;
@@ -16910,7 +16906,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     }
     const options2 = {
       socket,
-      servername: import_net.default.isIP(socket.host) ? void 0 : socket.host
+      servername: net.isIP(socket.host) ? void 0 : socket.host
     };
     if (sslnegotiation === "direct")
       options2.ALPNProtocols = ["postgresql"];
@@ -16919,7 +16915,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     else if (typeof ssl === "object")
       Object.assign(options2, ssl);
     socket.removeAllListeners();
-    socket = import_tls.default.connect(options2);
+    socket = tls.connect(options2);
     socket.on("secureConnect", connected);
     socket.on("error", error48);
     socket.on("close", closed);
@@ -16973,7 +16969,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     hostIndex = (hostIndex + 1) % port.length;
   }
   function reconnect() {
-    setTimeout(connect, closedTime ? Math.max(0, closedTime + delay - import_perf_hooks.performance.now()) : 0);
+    setTimeout(connect, closedTime ? Math.max(0, closedTime + delay - performance.now()) : 0);
   }
   function connected() {
     try {
@@ -17046,7 +17042,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     if (initial)
       return reconnect();
     !hadError && (query || sent.length) && error48(Errors.connection("CONNECTION_CLOSED", options, socket));
-    closedTime = import_perf_hooks.performance.now();
+    closedTime = performance.now();
     hadError && options.shared.retries++;
     delay = (typeof backoff2 === "function" ? backoff2(options.shared.retries) : backoff2) * 1e3;
     onclose(connection2, Errors.connection("CONNECTION_CLOSED", options, socket));
@@ -17271,14 +17267,14 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     );
   }
   async function SASL() {
-    nonce = (await import_crypto.default.randomBytes(18)).toString("base64");
+    nonce = (await crypto2.randomBytes(18)).toString("base64");
     bytes_default().p().str("SCRAM-SHA-256" + bytes_default.N);
     const i = bytes_default.i;
     write(bytes_default.inc(4).str("n,,n=*,r=" + nonce).i32(bytes_default.i - i - 4, i).end());
   }
   async function SASLContinue(x) {
     const res = x.toString("utf8", 9).split(",").reduce((acc, x2) => (acc[x2[0]] = x2.slice(2), acc), {});
-    const saltedPassword = await import_crypto.default.pbkdf2Sync(
+    const saltedPassword = await crypto2.pbkdf2Sync(
       await Pass(),
       Buffer.from(res.s, "base64"),
       parseInt(res.i),
@@ -17389,7 +17385,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     query.resolve(result);
   }
   function CopyInResponse() {
-    stream = new import_stream.default.Writable({
+    stream = new Stream.Writable({
       autoDestroy: true,
       write(chunk2, encoding, callback) {
         socket.write(bytes_default().d().raw(chunk2).end(), callback);
@@ -17408,7 +17404,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     query.resolve(stream);
   }
   function CopyOutResponse() {
-    stream = new import_stream.default.Readable({
+    stream = new Stream.Readable({
       read() {
         socket.resume();
       }
@@ -17416,7 +17412,7 @@ function Connection(options, queues = {}, { onopen = noop2, onend = noop2, onclo
     query.resolve(stream);
   }
   function CopyBothResponse() {
-    stream = new import_stream.default.Duplex({
+    stream = new Stream.Duplex({
       autoDestroy: true,
       read() {
         socket.resume();
@@ -17520,13 +17516,13 @@ function parseError(x) {
   return error48;
 }
 function md5(x) {
-  return import_crypto.default.createHash("md5").update(x).digest("hex");
+  return crypto2.createHash("md5").update(x).digest("hex");
 }
 function hmac(key, x) {
-  return import_crypto.default.createHmac("sha256", key).update(x).digest();
+  return crypto2.createHmac("sha256", key).update(x).digest();
 }
 function sha256(x) {
-  return import_crypto.default.createHash("sha256").update(x).digest();
+  return crypto2.createHash("sha256").update(x).digest();
 }
 function xor2(a, b2) {
   const length = Math.max(a.length, b2.length);
@@ -17554,14 +17550,9 @@ function timer(fn, seconds) {
     timer2 = null;
   }
 }
-var import_net, import_tls, import_crypto, import_stream, import_perf_hooks, connection_default, uid, Sync, Flush, SSLRequest, ExecuteUnnamed, DescribeUnnamed, noop2, retryRoutines, errorFields;
+var connection_default, uid, Sync, Flush, SSLRequest, ExecuteUnnamed, DescribeUnnamed, noop2, retryRoutines, errorFields;
 var init_connection = __esm({
   "node_modules/postgres/src/connection.js"() {
-    import_net = __toESM(require("net"), 1);
-    import_tls = __toESM(require("tls"), 1);
-    import_crypto = __toESM(require("crypto"), 1);
-    import_stream = __toESM(require("stream"), 1);
-    import_perf_hooks = require("perf_hooks");
     init_types();
     init_errors3();
     init_result();
@@ -17841,6 +17832,7 @@ var init_subscribe = __esm({
 });
 
 // node_modules/postgres/src/large.js
+import Stream2 from "stream";
 function largeObject(sql2, oid, mode = 131072 | 262144) {
   return new Promise(async (resolve, reject) => {
     await sql2.begin(async (sql3) => {
@@ -17877,7 +17869,7 @@ function largeObject(sql2, oid, mode = 131072 | 262144) {
       } = {}) {
         let max = end - start;
         start && await lo.seek(start);
-        return new import_stream2.default.Readable({
+        return new Stream2.Readable({
           highWaterMark,
           async read(size2) {
             const l = size2 > max ? size2 - max : size2;
@@ -17894,7 +17886,7 @@ function largeObject(sql2, oid, mode = 131072 | 262144) {
         start = 0
       } = {}) {
         start && await lo.seek(start);
-        return new import_stream2.default.Writable({
+        return new Stream2.Writable({
           highWaterMark,
           write(chunk, encoding, callback) {
             lo.write(chunk).then(() => callback(), callback);
@@ -17904,14 +17896,14 @@ function largeObject(sql2, oid, mode = 131072 | 262144) {
     }).catch(reject);
   });
 }
-var import_stream2;
 var init_large = __esm({
   "node_modules/postgres/src/large.js"() {
-    import_stream2 = __toESM(require("stream"), 1);
   }
 });
 
 // node_modules/postgres/src/index.js
+import os from "os";
+import fs from "fs";
 function Postgres(a, b2) {
   const options = parseOptions(a, b2), subscribe = options.no_subscribe || Subscribe(Postgres, { ...options });
   let ending = false;
@@ -17970,7 +17962,7 @@ function Postgres(a, b2) {
     function file2(path, args = [], options2 = {}) {
       arguments.length === 2 && !Array.isArray(args) && (options2 = args, args = []);
       const query = new Query([], args, (query2) => {
-        import_fs.default.readFile(path, "utf8", (err, string4) => {
+        fs.readFile(path, "utf8", (err, string4) => {
           if (err)
             return query2.reject(err);
           query2.strings = [string4];
@@ -18288,16 +18280,14 @@ function parseUrl(url2) {
 }
 function osUsername() {
   try {
-    return import_os.default.userInfo().username;
+    return os.userInfo().username;
   } catch (_) {
     return process.env.USERNAME || process.env.USER || process.env.LOGNAME;
   }
 }
-var import_os, import_fs, src_default;
+var src_default;
 var init_src = __esm({
   "node_modules/postgres/src/index.js"() {
-    import_os = __toESM(require("os"), 1);
-    import_fs = __toESM(require("fs"), 1);
     init_types();
     init_connection();
     init_query();
@@ -26623,11 +26613,11 @@ var init_postgres_js = __esm({
 
 // node_modules/dotenv/lib/main.js
 var require_main = __commonJS({
-  "node_modules/dotenv/lib/main.js"(exports2, module2) {
-    var fs2 = require("fs");
-    var path = require("path");
-    var os2 = require("os");
-    var crypto3 = require("crypto");
+  "node_modules/dotenv/lib/main.js"(exports, module) {
+    var fs2 = __require("fs");
+    var path = __require("path");
+    var os2 = __require("os");
+    var crypto3 = __require("crypto");
     var TIPS = [
       "\u25C8 encrypted .env [www.dotenvx.com]",
       "\u25C8 secrets for agents [www.dotenvx.com]",
@@ -26929,20 +26919,20 @@ var require_main = __commonJS({
       parse: parse5,
       populate
     };
-    module2.exports.configDotenv = DotenvModule.configDotenv;
-    module2.exports._configVault = DotenvModule._configVault;
-    module2.exports._parseVault = DotenvModule._parseVault;
-    module2.exports.config = DotenvModule.config;
-    module2.exports.decrypt = DotenvModule.decrypt;
-    module2.exports.parse = DotenvModule.parse;
-    module2.exports.populate = DotenvModule.populate;
-    module2.exports = DotenvModule;
+    module.exports.configDotenv = DotenvModule.configDotenv;
+    module.exports._configVault = DotenvModule._configVault;
+    module.exports._parseVault = DotenvModule._parseVault;
+    module.exports.config = DotenvModule.config;
+    module.exports.decrypt = DotenvModule.decrypt;
+    module.exports.parse = DotenvModule.parse;
+    module.exports.populate = DotenvModule.populate;
+    module.exports = DotenvModule;
   }
 });
 
 // node_modules/dotenv/lib/env-options.js
 var require_env_options = __commonJS({
-  "node_modules/dotenv/lib/env-options.js"(exports2, module2) {
+  "node_modules/dotenv/lib/env-options.js"(exports, module) {
     var options = {};
     if (process.env.DOTENV_CONFIG_ENCODING != null) {
       options.encoding = process.env.DOTENV_CONFIG_ENCODING;
@@ -26962,15 +26952,15 @@ var require_env_options = __commonJS({
     if (process.env.DOTENV_CONFIG_DOTENV_KEY != null) {
       options.DOTENV_KEY = process.env.DOTENV_CONFIG_DOTENV_KEY;
     }
-    module2.exports = options;
+    module.exports = options;
   }
 });
 
 // node_modules/dotenv/lib/cli-options.js
 var require_cli_options = __commonJS({
-  "node_modules/dotenv/lib/cli-options.js"(exports2, module2) {
+  "node_modules/dotenv/lib/cli-options.js"(exports, module) {
     var re = /^dotenv_config_(encoding|path|quiet|debug|override|DOTENV_KEY)=(.+)$/;
-    module2.exports = function optionMatcher(args) {
+    module.exports = function optionMatcher(args) {
       const options = args.reduce(function(acc, cur) {
         const matches = cur.match(re);
         if (matches) {
@@ -27580,14 +27570,6 @@ var init_channel = __esm({
     });
   }
 });
-
-// server/vercel-entry.ts
-var vercel_entry_exports = {};
-__export(vercel_entry_exports, {
-  config: () => config2,
-  default: () => vercel_entry_default
-});
-module.exports = __toCommonJS(vercel_entry_exports);
 
 // node_modules/hono/dist/adapter/vercel/handler.js
 var handle = (app2) => (req) => {
@@ -29856,7 +29838,7 @@ function parseConnectionParamsFromString(str) {
   }
   return parseConnectionParamsFromUnknown(parsed);
 }
-var import_objectSpread2$12 = __toESM2(require_objectSpread2(), 1);
+var import_objectSpread2$12 = __toESM(require_objectSpread2(), 1);
 function getAcceptHeader(headers) {
   var _ref, _headers$get;
   return (_ref = headers.get("trpc-accept")) !== null && _ref !== void 0 ? _ref : ((_headers$get = headers.get("accept")) === null || _headers$get === void 0 ? void 0 : _headers$get.split(",").some((t2) => t2.trim() === "application/jsonl")) ? "application/jsonl" : null;
@@ -30073,7 +30055,7 @@ function isPlainObject(o) {
   if (prot.hasOwnProperty("isPrototypeOf") === false) return false;
   return true;
 }
-var import_defineProperty2 = __toESM2(require_defineProperty(), 1);
+var import_defineProperty2 = __toESM(require_defineProperty(), 1);
 var _Symbol$toStringTag;
 var subscribableCache = /* @__PURE__ */ new WeakMap();
 var NOOP = () => {
@@ -30296,7 +30278,7 @@ function timerResource(ms) {
     if (timer2) clearTimeout(timer2);
   });
 }
-var require_usingCtx = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/usingCtx.js"(exports2, module2) {
+var require_usingCtx = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/usingCtx.js"(exports, module) {
   function _usingCtx() {
     var r = "function" == typeof SuppressedError ? SuppressedError : function(r$1, e$1) {
       var n$1 = Error();
@@ -30351,22 +30333,22 @@ var require_usingCtx = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runt
       }
     };
   }
-  module2.exports = _usingCtx, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+  module.exports = _usingCtx, module.exports.__esModule = true, module.exports["default"] = module.exports;
 } });
-var require_OverloadYield = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/OverloadYield.js"(exports2, module2) {
+var require_OverloadYield = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/OverloadYield.js"(exports, module) {
   function _OverloadYield(e, d) {
     this.v = e, this.k = d;
   }
-  module2.exports = _OverloadYield, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+  module.exports = _OverloadYield, module.exports.__esModule = true, module.exports["default"] = module.exports;
 } });
-var require_awaitAsyncGenerator = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/awaitAsyncGenerator.js"(exports2, module2) {
+var require_awaitAsyncGenerator = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/awaitAsyncGenerator.js"(exports, module) {
   var OverloadYield$2 = require_OverloadYield();
   function _awaitAsyncGenerator$5(e) {
     return new OverloadYield$2(e, 0);
   }
-  module2.exports = _awaitAsyncGenerator$5, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+  module.exports = _awaitAsyncGenerator$5, module.exports.__esModule = true, module.exports["default"] = module.exports;
 } });
-var require_wrapAsyncGenerator = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/wrapAsyncGenerator.js"(exports2, module2) {
+var require_wrapAsyncGenerator = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/wrapAsyncGenerator.js"(exports, module) {
   var OverloadYield$1 = require_OverloadYield();
   function _wrapAsyncGenerator$6(e) {
     return function() {
@@ -30433,11 +30415,11 @@ var require_wrapAsyncGenerator = __commonJS2({ "../../node_modules/.pnpm/@oxc-pr
   }, AsyncGenerator.prototype["return"] = function(e) {
     return this._invoke("return", e);
   };
-  module2.exports = _wrapAsyncGenerator$6, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+  module.exports = _wrapAsyncGenerator$6, module.exports.__esModule = true, module.exports["default"] = module.exports;
 } });
-var import_usingCtx$4 = __toESM2(require_usingCtx(), 1);
-var import_awaitAsyncGenerator$4 = __toESM2(require_awaitAsyncGenerator(), 1);
-var import_wrapAsyncGenerator$5 = __toESM2(require_wrapAsyncGenerator(), 1);
+var import_usingCtx$4 = __toESM(require_usingCtx(), 1);
+var import_awaitAsyncGenerator$4 = __toESM(require_awaitAsyncGenerator(), 1);
+var import_wrapAsyncGenerator$5 = __toESM(require_wrapAsyncGenerator(), 1);
 function iteratorResource(iterable) {
   const iterator = iterable[Symbol.asyncIterator]();
   if (iterator[Symbol.asyncDispose]) return iterator;
@@ -30488,9 +30470,9 @@ function createDeferred() {
     reject
   };
 }
-var import_usingCtx$3 = __toESM2(require_usingCtx(), 1);
-var import_awaitAsyncGenerator$3 = __toESM2(require_awaitAsyncGenerator(), 1);
-var import_wrapAsyncGenerator$4 = __toESM2(require_wrapAsyncGenerator(), 1);
+var import_usingCtx$3 = __toESM(require_usingCtx(), 1);
+var import_awaitAsyncGenerator$3 = __toESM(require_awaitAsyncGenerator(), 1);
+var import_wrapAsyncGenerator$4 = __toESM(require_wrapAsyncGenerator(), 1);
 function createManagedIterator(iterable, onResult) {
   const iterator = iterable[Symbol.asyncIterator]();
   let state = "idle";
@@ -30638,9 +30620,9 @@ function readableStreamFrom(iterable) {
     }
   });
 }
-var import_usingCtx$2 = __toESM2(require_usingCtx(), 1);
-var import_awaitAsyncGenerator$2 = __toESM2(require_awaitAsyncGenerator(), 1);
-var import_wrapAsyncGenerator$3 = __toESM2(require_wrapAsyncGenerator(), 1);
+var import_usingCtx$2 = __toESM(require_usingCtx(), 1);
+var import_awaitAsyncGenerator$2 = __toESM(require_awaitAsyncGenerator(), 1);
+var import_wrapAsyncGenerator$3 = __toESM(require_wrapAsyncGenerator(), 1);
 var PING_SYM = /* @__PURE__ */ Symbol("ping");
 function withPing(_x, _x2) {
   return _withPing.apply(this, arguments);
@@ -30677,7 +30659,7 @@ function _withPing() {
   });
   return _withPing.apply(this, arguments);
 }
-var require_asyncIterator = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/asyncIterator.js"(exports2, module2) {
+var require_asyncIterator = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/asyncIterator.js"(exports, module) {
   function _asyncIterator$2(r) {
     var n, t2, o, e = 2;
     for ("undefined" != typeof Symbol && (t2 = Symbol.asyncIterator, o = Symbol.iterator); e--; ) {
@@ -30719,12 +30701,12 @@ var require_asyncIterator = __commonJS2({ "../../node_modules/.pnpm/@oxc-project
       }
     }, new AsyncFromSyncIterator(r);
   }
-  module2.exports = _asyncIterator$2, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+  module.exports = _asyncIterator$2, module.exports.__esModule = true, module.exports["default"] = module.exports;
 } });
-var import_awaitAsyncGenerator$1 = __toESM2(require_awaitAsyncGenerator(), 1);
-var import_wrapAsyncGenerator$2 = __toESM2(require_wrapAsyncGenerator(), 1);
-var import_usingCtx$1 = __toESM2(require_usingCtx(), 1);
-var import_asyncIterator$1 = __toESM2(require_asyncIterator(), 1);
+var import_awaitAsyncGenerator$1 = __toESM(require_awaitAsyncGenerator(), 1);
+var import_wrapAsyncGenerator$2 = __toESM(require_wrapAsyncGenerator(), 1);
+var import_usingCtx$1 = __toESM(require_usingCtx(), 1);
+var import_asyncIterator$1 = __toESM(require_asyncIterator(), 1);
 var CHUNK_VALUE_TYPE_PROMISE = 0;
 var CHUNK_VALUE_TYPE_ASYNC_ITERABLE = 1;
 var PROMISE_STATUS_FULFILLED = 0;
@@ -30917,7 +30899,7 @@ function jsonlStreamProducer(opts) {
     else controller.enqueue(JSON.stringify(chunk) + "\n");
   } })).pipeThrough(new TextEncoderStream());
 }
-var require_asyncGeneratorDelegate = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/asyncGeneratorDelegate.js"(exports2, module2) {
+var require_asyncGeneratorDelegate = __commonJS2({ "../../node_modules/.pnpm/@oxc-project+runtime@0.72.2/node_modules/@oxc-project/runtime/src/helpers/asyncGeneratorDelegate.js"(exports, module) {
   var OverloadYield = require_OverloadYield();
   function _asyncGeneratorDelegate$1(t2) {
     var e = {}, n = false;
@@ -30940,13 +30922,13 @@ var require_asyncGeneratorDelegate = __commonJS2({ "../../node_modules/.pnpm/@ox
       return n ? (n = false, t$1) : pump("return", t$1);
     }), e;
   }
-  module2.exports = _asyncGeneratorDelegate$1, module2.exports.__esModule = true, module2.exports["default"] = module2.exports;
+  module.exports = _asyncGeneratorDelegate$1, module.exports.__esModule = true, module.exports["default"] = module.exports;
 } });
-var import_asyncIterator = __toESM2(require_asyncIterator(), 1);
-var import_awaitAsyncGenerator = __toESM2(require_awaitAsyncGenerator(), 1);
-var import_wrapAsyncGenerator$1 = __toESM2(require_wrapAsyncGenerator(), 1);
-var import_asyncGeneratorDelegate = __toESM2(require_asyncGeneratorDelegate(), 1);
-var import_usingCtx = __toESM2(require_usingCtx(), 1);
+var import_asyncIterator = __toESM(require_asyncIterator(), 1);
+var import_awaitAsyncGenerator = __toESM(require_awaitAsyncGenerator(), 1);
+var import_wrapAsyncGenerator$1 = __toESM(require_wrapAsyncGenerator(), 1);
+var import_asyncGeneratorDelegate = __toESM(require_asyncGeneratorDelegate(), 1);
+var import_usingCtx = __toESM(require_usingCtx(), 1);
 var PING_EVENT = "ping";
 var SERIALIZED_ERROR_EVENT = "serialized-error";
 var CONNECTED_EVENT = "connected";
@@ -31057,8 +31039,8 @@ var sseHeaders = {
   "X-Accel-Buffering": "no",
   Connection: "keep-alive"
 };
-var import_wrapAsyncGenerator = __toESM2(require_wrapAsyncGenerator(), 1);
-var import_objectSpread23 = __toESM2(require_objectSpread2(), 1);
+var import_wrapAsyncGenerator = __toESM(require_wrapAsyncGenerator(), 1);
+var import_objectSpread23 = __toESM(require_objectSpread2(), 1);
 function errorToAsyncIterable(err) {
   return run((0, import_wrapAsyncGenerator.default)(function* () {
     throw err;
@@ -31499,7 +31481,7 @@ async function resolveResponse(opts) {
 }
 
 // node_modules/@trpc/server/dist/adapters/fetch/index.mjs
-var import_objectSpread24 = __toESM2(require_objectSpread2(), 1);
+var import_objectSpread24 = __toESM(require_objectSpread2(), 1);
 var trimSlashes = (path) => {
   path = path.startsWith("/") ? path.slice(1) : path;
   path = path.endsWith("/") ? path.slice(0, -1) : path;
@@ -32313,10 +32295,10 @@ app.use("/trpc/*", async (c) => {
 });
 app.all("/*", (c) => c.json({ error: "Not Found" }, 404));
 var vercel_entry_default = handle(app);
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  config
-});
+export {
+  config2 as config,
+  vercel_entry_default as default
+};
 /*! Bundled license information:
 
 @trpc/server/dist/resolveResponse-CdASWfAV.mjs:
